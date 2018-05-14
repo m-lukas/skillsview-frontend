@@ -6,8 +6,14 @@ import { login } from '../../actions/auth';
 
 class LoginPage extends Component {
 
+  /*
+  Execute ../../actions/auth => login() with parameters after the
+  form has been submitted
+
+  If there are no errors => redirect back to the landing page
+  */
   submit = data => this.props.login(data)
-      .then(() => this.props.history.push("/projects/myproject"));
+      .then(() => this.props.history.push("/"));
 
   render() {
 

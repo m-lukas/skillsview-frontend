@@ -6,8 +6,14 @@ import { signup } from '../../actions/auth';
 
 class SignUpPage extends Component {
 
+  /*
+  Execute ../../actions/auth => signup() with parameters after the
+  form has been submitted
+
+  If there are no errors => redirect back to the landing page
+  */
   submit = data => this.props.signup(data)
-      .then(() => this.props.history.push("/projects/myproject"));
+      .then(() => this.props.history.push("/"));
 
   render() {
 

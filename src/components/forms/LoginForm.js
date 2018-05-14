@@ -6,27 +6,40 @@ import PropTypes from 'prop-types';
 import InlineError from '../messages/InlineError';
 
 class LoginForm extends Component {
+  //define local state (this.state)
   state = {
     data: {},
     loading: false,
     errors: {}
   }
 
+  //update this.state.data while typing in form fields
   onChange = e => this.setState({ 
     data: { ...this.state.data, [e.target.name]: e.target.value } 
   });
 
+  //form onSubmit
   onSubmit = e => {
+    e.preventDefault();
+    //local validation
     const errors = this.validate(this.state.data);
+    //update errors in local state
     this.setState({ errors });
-    this.setState({ loading: true });
+    //verify if errors exist
     if(Object.keys(errors).length === 0){
+      this.setState({ loading: true });
+      //get submit function from props and execute it
       this.props
-        .submit(this.state.data)
-        .catch(err => this.setState({ errors: err.response.data.errors, loading: false }));
+        .submit(Object.assign(this.state.data))
+        .catch(err => {
+            //add 404 response of api request to errors in local state
+            this.setState({ errors: err.response.data.errors, loading: false });
+            }    
+        );
     }
   };
 
+  //local validation function
   validate = (data) => {
     const errors = {};
     if(!isEmail(data.email)) errors.email = "Invalid email";
@@ -37,6 +50,7 @@ class LoginForm extends Component {
   render() {
     const { data, errors, loading } = this.state;
     return (
+        //login form
         <Form onSubmit={this.onSubmit} loading={loading}>
           { errors.global && (
             <Message negative>

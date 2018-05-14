@@ -19,15 +19,20 @@ import { userLoggedIn } from './actions/auth';
 import UserRoute from './components/routes/UserRoute';
 import GuestRoute from './components/routes/GuestRoute';
 
+//define root element
 const root = document.getElementById('root');
+//setup redux
 const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
+//check login session
 if(localStorage.skillboardJWT){
     const user = { token: localStorage.skillboardJWT };
     store.dispatch(userLoggedIn(user));
 }
 
+//React DOM Renderer
 ReactDOM.render(
+    //routes for navigation
     <BrowserRouter>
         <Provider store={store}>
             <Switch>

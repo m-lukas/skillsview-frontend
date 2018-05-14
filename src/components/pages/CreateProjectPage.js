@@ -6,11 +6,16 @@ import CreateProjectForm from '../forms/CreateProjectForm';
 
 class CreateProjectPage extends Component {
 
+  /*
+  Execute ../../actions/projects => createProject() with parameters after the
+  form has been submitted
+
+  If there are no errors => redirect to the project page
+  */
   submit = (data, addition) => this.props.createProject(data, addition)
         .then(() => this.props.history.push("/projects/" + addition.projectid));
 
   render() {
-
     return (
         <div>
             <h1>Create Project</h1>

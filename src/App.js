@@ -9,6 +9,7 @@ import './App.css';
 const App = ({ isAuthenticated, logout }) => (
   <div>
       <h1>Skillboard</h1>
+      {/*dynamic content based on the authentification state*/}
       { isAuthenticated ? (
         <button onClick={() => logout()}>Logout</button>
       ) : (
@@ -24,6 +25,7 @@ App.propTypes = {
   logout: PropTypes.func.isRequired
 }
 
+//convert redux-state to props
 function mapStateToProps(state) {
   return{
       isAuthenticated: !!state.user.token

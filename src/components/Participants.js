@@ -7,6 +7,7 @@ class Participants extends Component {
   render() {
 
     let participantItems;
+    //check if the participants array exists
     if(this.props.participants){
         participantItems = this.props.participants.map(participant => {
             return (

@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//execute api requests, return received data
 export default {
     user: {
         login: credentials => 
